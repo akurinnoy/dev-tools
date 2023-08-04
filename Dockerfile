@@ -1,4 +1,4 @@
-FROM quay.io/devfile/universal-developer-image:ubi8-38da5c2
+FROM quay.io/devfile/universal-developer-image:ubi8-8419c21
 
 USER root
 
