@@ -31,7 +31,7 @@ RUN mkdir -p /usr/local/share/fonts/FiraCode && \
 RUN yum copr enable -y atim/starship && \
     yum install -y starship
 
-USER 1001060000
+USER 10001
 
 # Add the init script to bashrc
 RUN echo 'eval "$(starship init bash)"' >> ~/.bashrc
