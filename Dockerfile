@@ -1,4 +1,4 @@
-FROM quay.io/devfile/universal-developer-image:ubi8-8419c21
+FROM quay.io/devfile/universal-developer-image:latest
 
 USER root
 
@@ -18,10 +18,6 @@ RUN yum clean all
 # Install chectl
 RUN curl -Lo chectl.sh  https://www.eclipse.org/che/chectl/ && \
     bash chectl.sh
-
-# Install skaffold
-RUN curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
-    install skaffold /usr/local/bin/
 
 # Download and install FiraCode Nerd Font from https://www.nerdfonts.com/font-downloads
 RUN mkdir -p /usr/local/share/fonts/FiraCode && \
