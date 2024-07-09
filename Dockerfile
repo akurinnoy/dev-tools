@@ -16,7 +16,7 @@ RUN yum install -y curl fish neovim vim wget zsh
 RUN yum clean all
 
 # Install chectl
-RUN curl -Lo chectl.sh  https://www.eclipse.org/che/chectl/ && \
+RUN curl -Lo chectl.sh  https://che-incubator.github.io/chectl/install.sh && \
     bash chectl.sh
 
 # Download and install FiraCode Nerd Font from https://www.nerdfonts.com/font-downloads
