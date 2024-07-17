@@ -31,6 +31,11 @@ RUN mkdir -p /usr/local/share/fonts/FiraCode && \
 RUN yum copr enable -y atim/starship && \
     yum install -y starship
 
+# Install neovim
+RUN yum install neovim
+# Update $PATH with neovim
+ENV PATH="$PATH:/usr/local/bin/nvim"
+
 USER 10001
 
 # Add the init script to bashrc
