@@ -6,6 +6,8 @@ USER root
 RUN cd /etc/yum.repos.d && \
     wget https://download.opensuse.org/repositories/shells:fish:release:3/CentOS_8/shells:fish:release:3.repo 
 
+RUN yum check-update
+
 # Add epel repo
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 
@@ -30,11 +32,6 @@ RUN mkdir -p /usr/local/share/fonts/FiraCode && \
 # RUN sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- --yes
 RUN yum copr enable -y atim/starship && \
     yum install -y starship
-
-# Install neovim
-RUN yum install neovim
-# Update $PATH with neovim
-ENV PATH="$PATH:/usr/local/bin/nvim"
 
 USER 10001
 
