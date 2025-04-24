@@ -3,8 +3,8 @@ FROM quay.io/devfile/universal-developer-image:latest
 USER root
 
 # Add fish repo 
-RUN cd /etc/yum.repos.d && \
-    wget https://download.opensuse.org/repositories/shells:fish:release:3/CentOS_8/shells:fish:release:3.repo 
+# RUN cd /etc/yum.repos.d && \
+#     wget https://download.opensuse.org/repositories/shells:fish:release:3/CentOS_8/shells:fish:release:3.repo 
 
 # Add epel repo
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
