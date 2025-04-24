@@ -10,7 +10,7 @@ USER root
 RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 
 # Install dependencies
-RUN yum install -y curl fish neovim vim wget zsh
+RUN yum install -y fish neovim vim wget zsh
 RUN yum install -y ripgrep
 
 # Clean dnf cache
