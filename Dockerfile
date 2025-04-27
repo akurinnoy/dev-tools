@@ -36,7 +36,7 @@ RUN python --version
 RUN pip --version
 
 # Install RA.Aid
-RAAID_DIR=~/ra-aid
+ENV RAAID_DIR=~/ra-aid
 RUN mkdir ${RAAID_DIR} && cd ${RAAID_DIR} && uv venv -p 3.12 && source .venv/bin/activate && uv pip install ra-aid
 
 USER 10001
