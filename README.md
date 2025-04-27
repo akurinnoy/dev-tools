@@ -1,3 +1,3 @@
-# dashboard.dev
+# dev-tools
 
-Development container for Che Dashboard
+Development container for using in Eclipse Che
