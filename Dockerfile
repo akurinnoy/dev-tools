@@ -32,8 +32,12 @@ RUN mkdir -p /usr/local/share/fonts/FiraCode && \
 RUN yum copr enable -y atim/starship && \
     yum install -y starship
 
+RUN python --version
+RUN pip --version
+
 # Install RA.Aid
-pip install ra-aid
+RAAID_DIR=~/ra-aid
+RUN mkdir ${RAAID_DIR} && cd ${RAAID_DIR} && uv venv -p 3.12 && source .venv/bin/activate && uv pip install ra-aid
 
 USER 10001
 
