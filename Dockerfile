@@ -32,13 +32,16 @@ RUN mkdir -p /usr/local/share/fonts/FiraCode && \
 RUN yum copr enable -y atim/starship && \
     yum install -y starship
 
+# Install RA.Aid
+pip install ra-aid
+
 USER 10001
 
 # Add the init script to bashrc
 RUN echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
 # Add the init script to zshrc
-RUN echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+RUN touch ~/.zshrc && echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 
 # Add the init script to fish config
 RUN mkdir -p ~/.config/fish && echo 'starship init fish | source' >> ~/.config/fish/config.fish
