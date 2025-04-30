@@ -3,14 +3,15 @@ FROM quay.io/devfile/universal-developer-image:latest
 USER root
 
 # Add fish repo 
-RUN cd /etc/yum.repos.d && \
-    wget https://download.opensuse.org/repositories/shells:fish:release:3/CentOS_8/shells:fish:release:3.repo 
+# RUN cd /etc/yum.repos.d && \
+#     wget https://download.opensuse.org/repositories/shells:fish:release:3/CentOS_8/shells:fish:release:3.repo 
 
 # Add epel repo
-RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 
 # Install dependencies
-RUN yum install -y curl fish neovim vim wget zsh
+RUN yum install -y fish neovim vim wget zsh
+RUN yum install -y ripgrep
 
 # Clean dnf cache
 RUN yum clean all
@@ -31,13 +32,20 @@ RUN mkdir -p /usr/local/share/fonts/FiraCode && \
 RUN yum copr enable -y atim/starship && \
     yum install -y starship
 
+RUN python --version
+RUN pip --version
+
+# Install RA.Aid
+ENV RAAID_DIR=~/ra-aid
+RUN mkdir ${RAAID_DIR} && cd ${RAAID_DIR} && uv venv -p 3.12 && source .venv/bin/activate && uv pip install ra-aid
+
 USER 10001
 
 # Add the init script to bashrc
 RUN echo 'eval "$(starship init bash)"' >> ~/.bashrc
 
 # Add the init script to zshrc
-RUN echo 'eval "$(starship init zsh)"' >> ~/.zshrc
+RUN touch ~/.zshrc && echo 'eval "$(starship init zsh)"' >> ~/.zshrc
 
 # Add the init script to fish config
 RUN mkdir -p ~/.config/fish && echo 'starship init fish | source' >> ~/.config/fish/config.fish
