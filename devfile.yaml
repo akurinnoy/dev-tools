@@ -1,0 +1,11 @@
+schemaVersion: 2.2.0
+metadata:
+  name: dev-tools
+components:
+  - name: tools
+    container:
+      image: quay.io/okurinny/dev-tools:latest
+      memoryRequest: 1Gi
+      memoryLimit: 16Gi
+      cpuLimit: '4'
+      cpuRequest: '0.5'
