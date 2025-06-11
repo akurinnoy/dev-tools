@@ -32,7 +32,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Using /opt/ra_aid_venv for the virtual environment and pinning protobuf versions
 RUN uv venv /opt/ra_aid_venv --python 3.12 \
     && . /opt/ra_aid_venv/bin/activate \
-    && uv pip install protobuf==4.25.3 googleapis-common-protos==1.63.0 ra-aid aider-chat@latest
+    && uv pip install ra-aid aider-chat
 
 # Add the ra-aid venv bin to the PATH so its executables are accessible
 ENV PATH="/opt/ra_aid_venv/bin:${PATH}"
