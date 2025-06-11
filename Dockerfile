@@ -13,9 +13,6 @@ RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.n
     zsh \
     ripgrep \
     ca-certificates \
-    # Python 3.12. The venv module should be included. If 'uv venv' later fails,
-    # a specific venv package (e.g., python3-virtualenv or python3.12-venv variant)
-    # might be needed, or Python installed differently.
     python3.12 && \
     yum copr enable -y atim/starship && \
     yum install -y starship && \
@@ -28,14 +25,18 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 # Add uv's installation directory to the PATH for root and subsequent users
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-# Create a Python virtual environment for ra-aid and install it
-# Using /opt/ra_aid_venv for the virtual environment and pinning protobuf versions
+# Create a Python virtual environment for the ra-aid package and install it
 RUN uv venv /opt/ra_aid_venv --python 3.12 \
     && . /opt/ra_aid_venv/bin/activate \
-    && uv pip install ra-aid aider-chat
+    && uv pip install protobuf==4.25.3 googleapis-common-protos==1.63.0 ra-aid
 
-# Add the ra-aid venv bin to the PATH so its executables are accessible
-ENV PATH="/opt/ra_aid_venv/bin:${PATH}"
+# Create a Python virtual environment for the aider-chat package and install it
+RUN uv venv /opt/aider_chat_venv --python 3.12 \
+    && . /opt/aider_chat_venv/bin/activate \
+    && uv pip install aider-chat
+
+# Add the bin directories of both virtual environments to the PATH
+ENV PATH="/opt/ra_aid_venv/bin:/opt/aider_chat_venv/bin:${PATH}"
 
 # Install chectl
 RUN curl -Lo /usr/local/bin/chectl https://che-incubator.github.io/chectl/install.sh && \
